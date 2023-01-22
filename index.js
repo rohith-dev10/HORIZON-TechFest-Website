@@ -9,8 +9,15 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-mongoose.connect('mongodb+srv://iiitvicd:iiitv123@cluster0.lgokxw0.mongodb.net/?retryWrites=true&w=majority' , {
+const bodyParser = require('body-parser'); //
+// app.use(bodyParser.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000})); //
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+// mongodb+srv://iiitvicd:iiitv123@cluster0.lgokxw0.mongodb.net/TechFest?retryWrites=true&w=majority
+mongoose.connect('mongodb+srv://iiitvicd:iiitv123@cluster0.lgokxw0.mongodb.net/TechFest?retryWrites=true&w=majority' , {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }, (err) => {

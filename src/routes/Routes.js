@@ -1,7 +1,7 @@
 const express = require('express');
-const User = require('../Models/userModel');
+const User = require('../models/userModel');
 
-var upload = require('../Middleware/Multer');
+var upload = require('../middleware/Multer');
 
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
@@ -20,13 +20,16 @@ router.post('/signupuser', upload.single("image"), [
   body('institute', 'institute name must be atleast 5 letters').isLength({ min: 5 }),
 ], async (req, res) => {
   // If there are errors, return Bad request and the errors
+  console.log("  Hr0");
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({errors: errors.array() });
   }
   if(req.file){
 
-    console.log(req.file.path);
+	console.log("  Hr");
+	// console.log(req.file.path+"  Hr");
+	console.log("  Hr");
     var filepath = req.file.path;
 
   }
@@ -41,7 +44,6 @@ router.post('/signupuser', upload.single("image"), [
 
     // Create a new user
     user = await User.create({
- 
       name: req.body.name,
       email: req.body.email,
       number: req.body.number,
